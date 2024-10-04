@@ -8,6 +8,7 @@
     align-items: center;
     position: fixed;
     border-bottom: 1px solid var(--primary-accent);
+    z-index: 999;
 }
 
 .header-logo {
@@ -56,4 +57,50 @@
 .header-btn:hover {
     color: var(--primary-accent);
     background-color: var(--secondary-accent);
+}
+
+.header-menu {
+    display: none;
+}
+
+.header-menu-btn {
+    font-size: 20px;
+    color: var(--primary-accent);
+    cursor: pointer;
+    margin-right: 28px;
+}
+
+.header-menu-navigation-bg {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+.header-menu-navigation {
+    margin-top: 80px;
+    background-color: var(--secondary-accent);
+}
+
+.header-menu-navigation-text {
+    color: var(--primary-bg);
+    margin-block: 0px;
+    margin-inline: 10px;
+    padding: 20px 30px;
+    cursor: pointer;
+}
+
+.text-border {
+    border-bottom: 1px solid var(--primary-accent);
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .header-navigation,
+    .header-btn {
+        display: none;
+    }
+
+    .header-menu {
+        display: inline;
+    }
 }
