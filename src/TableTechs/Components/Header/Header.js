@@ -1,5 +1,5 @@
-import "./header.css";
-import logo from "../../Assets/logo-orange.png";
+import "./Header.css";
+import logo from "../../../Assets/logo-orange.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
