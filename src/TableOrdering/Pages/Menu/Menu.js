@@ -235,14 +235,14 @@ function MenuPage() {
         await navigate("details");
     }
 
-    const updateTray = async () => {
+    const updateTray = async (navigateTo) => {
         await dispatch({
             type: 'update_tray',
             payload: {
                 tray: { ...tray }
             }
         });
-        await navigate("tray");
+        await navigate(navigateTo);
     }
 
     return (
@@ -270,10 +270,10 @@ function MenuPage() {
                     <span>{"$" + total.toFixed(2)}</span>
                 </div>
                 <div className='menu-total-container'>
-                    <div className='menu-view-table-btn'>
+                    <div className='menu-view-table-btn' onClick={() => updateTray("table")}>
                         <span>View Table</span>
                     </div>
-                    <div className='menu-add-to-tray-btn' onClick={() => updateTray()}>
+                    <div className='menu-add-to-tray-btn' onClick={() => updateTray("tray")}>
                         <span>Add to Tray</span>
                     </div>
                 </div>
