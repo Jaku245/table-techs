@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import "./App.css";
 import OrderPage from './TableOrdering/Pages/Order/Order';
@@ -6,6 +6,7 @@ import MenuPage from './TableOrdering/Pages/Menu/Menu';
 import MainPage from './TableTechs/Pages/Main/Main';
 import HomePage from './TableTechs/Pages/Home/Home';
 import DetailsPage from './TableOrdering/Pages/Details/Details';
+import TrayPage from './TableOrdering/Pages/Tray/Tray';
 
 function App() {
   return (
@@ -13,13 +14,14 @@ function App() {
       <Routes>
         <Route path='/order' element={<OrderPage />}>
           <Route path='details' element={<DetailsPage />} />
+          <Route path='tray' element={<TrayPage />} />
           <Route path='' element={<MenuPage />} />
-          <Route path='*' element={<MenuPage />} />
+          <Route path='*' element={<Navigate to="/order" />} />
         </Route>
         
         <Route path='/' element={<MainPage />}>
           <Route path='' element={<HomePage />} />
-          <Route path='*' element={<HomePage />} />
+          <Route path='*' element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </Router>

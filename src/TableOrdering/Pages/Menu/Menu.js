@@ -242,6 +242,7 @@ function MenuPage() {
                 tray: { ...tray }
             }
         });
+        await navigate("tray");
     }
 
     return (
