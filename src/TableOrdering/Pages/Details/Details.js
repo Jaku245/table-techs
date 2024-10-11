@@ -11,7 +11,7 @@ function DetailsPage() {
 
     const [item,] = useState({ ...state.selectedItem }, {});
     let [quantity, setQuantity] = useState(state.tray[item.id] ? state.tray[item.id].quantity : 0);
-    const [specialInstruction, setSpecialInstruction] = useState("");
+    const [specialInstruction, setSpecialInstruction] = useState(state.tray[item.id] ? state.tray[item.id].instruction : "");
 
     const increaseQuantity = () => {
         quantity++;
@@ -25,12 +25,12 @@ function DetailsPage() {
 
     const updateTray = async () => {
         const newTray = { ...state.tray };
-        newTray.instruction = specialInstruction;
         if (newTray[item.id]) {
             newTray[item.id].quantity = quantity;
         } else {
             newTray[item.id] = { ...item, quantity: quantity };
         }
+        newTray[item.id].instruction = specialInstruction;
         if (newTray[item.id].quantity === 0) {
             delete newTray[item.id];
         }
