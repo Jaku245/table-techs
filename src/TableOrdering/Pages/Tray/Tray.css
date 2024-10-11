@@ -1,46 +1,35 @@
-.details-bg {
+.tray-bg {
     padding-top: 50px;
     background-color: var(--light-bg);
     height: 100vh;
+    padding-bottom: 50px;
 }
 
-.details-banner {
-    height: 300px;
-    overflow: hidden;
-    position: relative;
+.tray-title {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 17px;
 }
 
-.details-banner-img {
-    position: absolute;
-    top: 0;
-    /* margin: auto; */
-    /* min-height: 100%; */
-    width: 100%;
+.tray-container {
+    padding-inline: 50px;
 }
 
-.details-container {
-    padding: 30px 20px 20px 20px;
+.no-tray-text {
+    text-align: center;
 }
 
-.details-header-div {
+.tray-items-div {
     display: flex;
     justify-content: space-between;
 }
 
-.details-title {
-    margin: 0;
-}
-
-.details-price {
-    margin: 0;
-}
-
-.details-quantity-div {
+.tray-quantity-div {
     display: flex;
     align-items: center;
 }
 
-.details-quantity-btn {
+.tray-quantity-btn {
     color: var(--light-bg);
     background-color: var(--primary-accent);
     text-align: center;
@@ -50,7 +39,7 @@
     width: 25px;
 }
 
-.details-quantity {
+.tray-quantity {
     background-color: var(--light-bg);
     color: var(--secondary-bg);
     text-align: center;
@@ -61,22 +50,26 @@
     min-width: 20px;
 }
 
-.details-description {
-    padding-block: 10px;
-}
-
-.details-special-textarea {
-    width: 90%;
-    font-size: 16px;
-    padding: 10px;
-}
-
-.details-done-btn {
+.tray-btn-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
     left: 20px;
+}
+
+.add-to-table-btn {
     background-color: var(--primary-accent);
+    color: var(--light-bg);
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.back-to-menu-btn {
+    background-color: var(--primary-bg);
     color: var(--light-bg);
     height: 44px;
     display: flex;

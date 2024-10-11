@@ -8,13 +8,18 @@ const Reducer = (state, action) => {
         case 'update_tray':
             return {
                 ...state,
-                tray: action.payload.tray
+                tray: {...action.payload.tray}
             };
         case 'select_item':
             return {
                 ...state,
-                tray: action.payload.tray,
-                selectedItem: action.payload.selectedItem
+                tray: {...action.payload.tray},
+                selectedItem: {...action.payload.selectedItem}
+            };
+        case 'update_table':
+            return {
+                ...state,
+                table: {...action.payload.table}
             };
         default:
             return {
