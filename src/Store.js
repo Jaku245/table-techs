@@ -4,7 +4,10 @@ import Reducer from "./Reducer";
 const initialState = {
     tray: {},
     table: {},
-    user: {}
+    user: {},
+    total: "0.00",
+    selectedItem: {},
+    selectedCategory: 'Best Sellers'
 };
 
 export const context = createContext(initialState);

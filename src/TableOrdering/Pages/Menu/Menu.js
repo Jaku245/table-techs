@@ -17,15 +17,16 @@ import cheeseGarlicNaan from '../../../Assets/cheese-garlic-naan.jpg';
 import mangoLassi from '../../../Assets/mango-lassi.jpg';
 import pineAppleJuice from '../../../Assets/pineapple-juice.jpg';
 import masalaChai from '../../../Assets/masala-chai.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function MenuPage() {
 
     const [state, dispatch] = useContext(context);
+    let navigate = useNavigate();
 
     const [restaurant,] = useState("Naan N Curry");
     const [description,] = useState("Indian Cuisine");
-    const [selectedCategory, setSelectedCategory] = useState('Best Sellers');
-    const [total, setTotal] = useState(0.00);
+    const [selectedCategory, setSelectedCategory] = useState(state.selectedCategory, 'Best Sellers');
     const [categories,] = useState(['Best Sellers', 'Appetizers', 'Curry', 'Naans', 'Beverages']);
     const [items, setItems] = useState([
         {
@@ -34,8 +35,7 @@ function MenuPage() {
             description: "Chunks of paneer marinated in spices and grilled in tandoor, served with Green Chutney.",
             price: "13.50",
             img: paneerTikka,
-            categories: ['Appetizers'],
-            quantity: 0
+            categories: ['Appetizers']
         },
         {
             id: 2,
@@ -43,8 +43,7 @@ function MenuPage() {
             description: "Bone in Chicken marinated in yogurt and spices roasted in the tandoor served with lemon and Green Chutney.",
             price: "14.99",
             img: tandooriChicken,
-            categories: ['Appetizers'],
-            quantity: 0
+            categories: ['Appetizers']
         },
         {
             id: 3,
@@ -52,8 +51,7 @@ function MenuPage() {
             description: "Bone in Chicken marinated in yogurt and spices roasted in the tandoor served with lemon and Green Chutney.",
             price: "11.50",
             img: mixedAppetizer,
-            categories: ['Appetizers', 'Best Sellers'],
-            quantity: 0
+            categories: ['Appetizers', 'Best Sellers']
         },
         {
             id: 4,
@@ -61,8 +59,7 @@ function MenuPage() {
             description: "Heart Indian chickpea curry with fresh garlic, onions, tomatoes, green chilies, and coriander",
             price: "15.50",
             img: chanaMasala,
-            categories: ['Curry', 'Best Sellers'],
-            quantity: 0
+            categories: ['Curry', 'Best Sellers']
         },
         {
             id: 5,
@@ -70,8 +67,7 @@ function MenuPage() {
             description: "Buttery and creamy dish, giving smooth and rich flavour.",
             price: "16.25",
             img: butterChicken,
-            categories: ['Curry', 'Best Sellers'],
-            quantity: 0
+            categories: ['Curry', 'Best Sellers']
         },
         {
             id: 6,
@@ -79,8 +75,7 @@ function MenuPage() {
             description: "A favorite from Indian dishes made with chicken in a delicious gravy with herbs and spices",
             price: "16.25",
             img: chickenCurry,
-            categories: ['Curry'],
-            quantity: 0
+            categories: ['Curry']
         },
         {
             id: 7,
@@ -88,8 +83,7 @@ function MenuPage() {
             description: "Basmati rice and slow cooked vegetables in a classic biryani gravy.",
             price: "16.99",
             img: vegBiryani,
-            categories: ['Curry', 'Best Sellers'],
-            quantity: 0
+            categories: ['Curry', 'Best Sellers']
         },
         {
             id: 8,
@@ -97,8 +91,7 @@ function MenuPage() {
             description: "A traditional classic Mughlai dish that is decadent with tender chicken and bursting flavours ground spices.",
             price: "17.99",
             img: chickenBiryani,
-            categories: ['Curry'],
-            quantity: 0
+            categories: ['Curry']
         },
         {
             id: 9,
@@ -106,8 +99,7 @@ function MenuPage() {
             description: "",
             price: "3.99",
             img: butterNaan,
-            categories: ['Naans'],
-            quantity: 0
+            categories: ['Naans']
         },
         {
             id: 10,
@@ -115,8 +107,7 @@ function MenuPage() {
             description: "",
             price: "4.25",
             img: garlicNaan,
-            categories: ['Naans'],
-            quantity: 0
+            categories: ['Naans']
         },
         {
             id: 11,
@@ -124,8 +115,7 @@ function MenuPage() {
             description: "",
             price: "4.75",
             img: cheeseGarlicNaan,
-            categories: ['Naans', 'Best Sellers'],
-            quantity: 0
+            categories: ['Naans', 'Best Sellers']
         },
         {
             id: 12,
@@ -133,8 +123,7 @@ function MenuPage() {
             description: "A refreshing and creamy yogurt drink infused with sweet mango",
             price: "5.50",
             img: mangoLassi,
-            categories: ['Beverages', 'Best Sellers'],
-            quantity: 0
+            categories: ['Beverages', 'Best Sellers']
         },
         {
             id: 13,
@@ -142,8 +131,7 @@ function MenuPage() {
             description: "",
             price: "3.50",
             img: pineAppleJuice,
-            categories: ['Beverages'],
-            quantity: 0
+            categories: ['Beverages']
         },
         {
             id: 14,
@@ -151,19 +139,30 @@ function MenuPage() {
             description: "Spiced Indian tea for ultimate comfort and flavor",
             price: "3.50",
             img: masalaChai,
-            categories: ['Beverages'],
-            quantity: 0
+            categories: ['Beverages']
         }
     ]);
-    const [tray, setTray] = useState(state.tray, {});
+    const [tray, setTray] = useState({ ...state.tray }, {});
+
+    let total = 0.00;
 
     const renderCategories = () => {
         return categories.map((category, index) => {
             return (
-                <div className={selectedCategory === category ? 'selected-category' : 'menu-category-box'} key={index} onClick={() => setSelectedCategory(category)}>
+                <div className={selectedCategory === category ? 'selected-category' : 'menu-category-box'} key={index} onClick={() => selectCategory(category)}>
                     <p className='menu-category-text'>{category}</p>
                 </div>
             )
+        });
+    }
+
+    const selectCategory = (category) => {
+        setSelectedCategory(category);
+        dispatch({
+            type: 'select_category',
+            payload: {
+                selectedCategory: category
+            }
         });
     }
 
@@ -171,11 +170,13 @@ function MenuPage() {
         const newItems = [...items];
         newItems.forEach(item => {
             if (item.id === itemId) {
-                item.quantity++;
                 const newTray = { ...tray };
-                newTray[itemId] = item;
+                if (newTray[itemId]) {
+                    newTray[itemId].quantity++;
+                } else {
+                    newTray[itemId] = { ...item, quantity: 1 };
+                }
                 setTray(newTray);
-                setTotal(total + parseFloat(item.price));
             }
         })
         setItems(newItems);
@@ -185,14 +186,16 @@ function MenuPage() {
         const newItems = [...items];
         newItems.forEach(item => {
             if (item.id === itemId) {
-                item.quantity--;
                 const newTray = { ...tray };
-                newTray[itemId] = item;
-                if (item.quantity === 0) {
+                if (newTray[itemId]) {
+                    newTray[itemId].quantity--;
+                } else {
+                    newTray[itemId] = { ...item, quantity: 1 };
+                }
+                if (newTray[itemId].quantity === 0) {
                     delete newTray[itemId];
                 }
                 setTray(newTray);
-                setTotal(total - parseFloat(item.price));
             }
         })
         setItems(newItems);
@@ -201,14 +204,17 @@ function MenuPage() {
     const renderItems = () => {
         const filteredItems = items.filter(item => item.categories.includes(selectedCategory));
         return filteredItems.map(item => {
+            total += tray[item.id] !== undefined ? tray[item.id].quantity * parseFloat(item.price) : 0.00;
             return (
                 <div className='menu-item-div' key={item.id}>
                     <div className='menu-item-img-div'>
-                        <img src={item.img} className='menu-item-img' alt={item.name} />
+                        <img src={item.img} className='menu-item-img' alt={item.name} onClick={() => setDetails(item)} />
                         <div className="menu-quantity-div">
-                            {item.quantity !== 0 && <div className="menu-quantity-btn-minus" onClick={() => decreaseQuantity(item.id)}>-</div>}
-                            {item.quantity !== 0 && <div className="menu-quantity"><span>{item.quantity}</span></div>}
-                            <div className={item.quantity !== 0 ? 'menu-quantity-btn-plus' : "menu-quantity-btn"} onClick={() => increaseQuantity(item.id)}>+</div>
+                            {tray[item.id] !== undefined && <>
+                                <div className="menu-quantity-btn-minus" onClick={() => decreaseQuantity(item.id)}>-</div>
+                                <div className="menu-quantity"><span>{tray[item.id].quantity}</span></div>
+                            </>}
+                            <div className={tray[item.id] !== undefined ? 'menu-quantity-btn-plus' : "menu-quantity-btn"} onClick={() => increaseQuantity(item.id)}>+</div>
                         </div>
                     </div>
                     <p className='menu-item-name poppins-semibold'>{item.name}</p>
@@ -218,11 +224,22 @@ function MenuPage() {
         });
     }
 
+    const setDetails = async (item) => {
+        await dispatch({
+            type: 'select_item',
+            payload: {
+                tray: { ...tray },
+                selectedItem: { ...item }
+            }
+        });
+        await navigate("details");
+    }
+
     const updateTray = async () => {
         await dispatch({
             type: 'update_tray',
             payload: {
-                tray: tray
+                tray: { ...tray }
             }
         });
     }
