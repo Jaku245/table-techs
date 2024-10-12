@@ -8,7 +8,7 @@ function TrayPage() {
     const [state, dispatch] = useContext(context);
     let navigate = useNavigate();
 
-    const [tray, setTray] = useState(Object.keys(state.tray).length > 0 ? {...state.tray} : null);
+    const [tray, setTray] = useState(Object.keys(state.tray).length > 0 ? { ...state.tray } : null);
 
     const renderTray = () => {
         return Object.keys(tray).map(key => {
@@ -27,7 +27,7 @@ function TrayPage() {
 
     const increaseQuantity = (itemId) => {
         const newTray = { ...tray };
-        const objectToUpdate = {...newTray[itemId]};
+        const objectToUpdate = { ...newTray[itemId] };
         objectToUpdate.quantity++;
         newTray[itemId] = objectToUpdate;
         setTray(newTray);
@@ -35,7 +35,7 @@ function TrayPage() {
 
     const decreaseQuantity = (itemId) => {
         const newTray = { ...tray };
-        const objectToUpdate = {...newTray[itemId]};
+        const objectToUpdate = { ...newTray[itemId] };
         objectToUpdate.quantity--;
         newTray[itemId] = objectToUpdate;
         if (objectToUpdate.quantity === 0) {
@@ -50,6 +50,8 @@ function TrayPage() {
 
     const addToTable = async () => {
         let table = { ...state.table };
+        let allTrays = [...state.allTrays];
+        allTrays.push(tray);
         await Object.keys(tray).forEach(key => {
             if (table[tray[key].id]) {
                 let newQuantity = table[tray[key].id].quantity + tray[key].quantity;
@@ -61,9 +63,11 @@ function TrayPage() {
         await dispatch({
             type: 'update_table',
             payload: {
-                table: { ...table }
+                table: { ...table },
+                allTrays: [...allTrays]
             }
         });
+        await navigate("/order/table");
     }
 
     return (

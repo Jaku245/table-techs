@@ -7,6 +7,7 @@ import MainPage from './TableTechs/Pages/Main/Main';
 import HomePage from './TableTechs/Pages/Home/Home';
 import DetailsPage from './TableOrdering/Pages/Details/Details';
 import TrayPage from './TableOrdering/Pages/Tray/Tray';
+import TablePage from './TableOrdering/Pages/Table/Table';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/order' element={<OrderPage />}>
           <Route path='details' element={<DetailsPage />} />
           <Route path='tray' element={<TrayPage />} />
+          <Route path='table' element={<TablePage />} />
           <Route path='' element={<MenuPage />} />
           <Route path='*' element={<Navigate to="/order" />} />
         </Route>
