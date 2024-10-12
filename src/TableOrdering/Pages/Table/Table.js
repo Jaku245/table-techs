@@ -12,8 +12,11 @@ function TablePage() {
     const [allTrays,] = useState(state.allTrays.length > 0 ? [...state.allTrays] : []);
     const [tableFilter, setTableFilter] = useState("table");
 
+    let subTotal = 0.00;
+
     const renderTable = () => {
         return Object.keys(table).map(key => {
+            subTotal += table[key].quantity * parseFloat(table[key].price);
             return (
                 <div className="table-items-div" key={table[key].id}>
                     <p>{table[key].name}</p>
@@ -27,7 +30,7 @@ function TablePage() {
         return allTrays.map((tray, index) => {
             return (
                 <div key={index}>
-                    <div className="table-hr-line"></div>
+                    {index !== 0 && <div className="table-hr-line"></div>}
                     {renderTray(allTrays[allTrays.length - index - 1])}
                 </div>
             )
@@ -66,12 +69,17 @@ function TablePage() {
                         <>
                             <div>
                                 {renderTable()}
+                                <div className="table-hr-line"></div>
+                                <div className="table-sub-total poppins-semibold">
+                                    <p>Sub Total:</p>
+                                    <p>{" $" + subTotal.toFixed(2)}</p>
+                                </div>
                             </div>
                         </> :
                         <div className="no-table-text poppins-regular">
                             <p>We found your table empty. Please add something from the menu to your Tray or call attendant for help.</p>
                         </div>
-                    : allTrays !== null ?
+                    : allTrays.length !== 0 ?
                         <>
                             <div>
                                 {renderTrays()}

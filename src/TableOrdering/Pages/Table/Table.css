@@ -101,3 +101,8 @@
     align-items: center;
     border-radius: 5px;
 }
+
+.table-sub-total {
+    display: flex;
+    justify-content: space-between;
+}
