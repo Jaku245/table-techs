@@ -8,6 +8,8 @@ import HomePage from './TableTechs/Pages/Home/Home';
 import DetailsPage from './TableOrdering/Pages/Details/Details';
 import TrayPage from './TableOrdering/Pages/Tray/Tray';
 import TablePage from './TableOrdering/Pages/Table/Table';
+import ScrollToTop from './TableTechs/Components/ScrollToTop/ScrollToTop';
+import CheckoutPage from './TableOrdering/Pages/Checkout/Checkout';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path='details' element={<DetailsPage />} />
           <Route path='tray' element={<TrayPage />} />
           <Route path='table' element={<TablePage />} />
+          <Route path='checkout' element={<CheckoutPage />} />
           <Route path='' element={<MenuPage />} />
           <Route path='*' element={<Navigate to="/order" />} />
         </Route>
@@ -26,6 +29,7 @@ function App() {
           <Route path='*' element={<Navigate to="/" />} />
         </Route>
       </Routes>
+      <ScrollToTop />
     </Router>
   );
 }

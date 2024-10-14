@@ -53,7 +53,7 @@ function TablePage() {
     }
 
     const wrapMyTable = async () => {
-        console.log("wrap my table");
+        navigate("/order/checkout");
     }
 
     return (
@@ -71,7 +71,7 @@ function TablePage() {
                                 {renderTable()}
                                 <div className="table-hr-line"></div>
                                 <div className="table-sub-total poppins-semibold">
-                                    <p>Sub Total:</p>
+                                    <p>Sub Total</p>
                                     <p>{" $" + subTotal.toFixed(2)}</p>
                                 </div>
                             </div>
