@@ -12,7 +12,7 @@ function HeaderComponent() {
   return (
     <div className="order-header-bg">
       <div className="order-header-logo">
-        {pathname !== "/order" && <FontAwesomeIcon icon={faArrowLeft} className="order-header-back-btn" onClick={() => navigate(-1)} />}
+        {pathname !== "/order" && pathname !== "/order/thanks" && <FontAwesomeIcon icon={faArrowLeft} className="order-header-back-btn" onClick={() => navigate(-1)} />}
         <img src={logoWhite} className="order-header-logo-img" alt="order-header-logo" />
         <span className="order-header-text poppins-black" onClick={() => navigate("/order")}>Table Techs</span>
       </div>

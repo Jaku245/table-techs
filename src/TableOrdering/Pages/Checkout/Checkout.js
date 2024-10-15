@@ -2,11 +2,11 @@ import { useContext, useState } from 'react';
 
 import './Checkout.css'
 import { context } from '../../../Store';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutPage() {
-    const [state,] = useContext(context);
-    // let navigate = useNavigate();
+    const [state, dispatch] = useContext(context);
+    let navigate = useNavigate();
 
     const [table,] = useState(Object.keys(state.table).length > 0 ? { ...state.table } : null);
     const [tip, setTip] = useState('');
@@ -49,12 +49,20 @@ function CheckoutPage() {
         setTipSelected(tipFilter);
     }
 
-    const backToMenu = () => {
-        // navigate("/order/thanks");
+    const clearAppData = () => {
+        dispatch({
+            type: 'payment_done'
+        });
     }
 
-    const wrapMyTable = async () => {
-        // navigate("/order/thanks");
+    const onApplePay = () => {
+        clearAppData();
+        navigate("/order/thanks");
+    }
+
+    const onCardPay = async () => {
+        clearAppData();
+        navigate("/order/thanks");
     }
 
     return (
@@ -100,10 +108,10 @@ function CheckoutPage() {
                     <span>pay</span><span className='checkout-total-content poppins-semibold'>{" $" + (postTax + (tip || parseFloat("0.00"))).toFixed(2) + "  "}</span><span>with</span>
                 </p>
                 <div className='checkout-total-container'>
-                    <div className='checkout-apple-pay-btn' onClick={() => backToMenu()}>
+                    <div className='checkout-apple-pay-btn' onClick={() => onApplePay()}>
                         <span>Apple Pay</span>
                     </div>
-                    <div className='checkout-debit-btn' onClick={() => wrapMyTable()}>
+                    <div className='checkout-debit-btn' onClick={() => onCardPay()}>
                         <span>Debit / Credit</span>
                     </div>
                 </div>

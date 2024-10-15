@@ -6,7 +6,7 @@ const initialState = {
     allTrays: [],
     table: {},
     user: {},
-    total: "0.00",
+    total: 0.00,
     selectedItem: {},
     selectedCategory: 'Best Sellers'
 };
