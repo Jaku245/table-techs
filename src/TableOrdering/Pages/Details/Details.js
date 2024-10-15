@@ -12,14 +12,17 @@ function DetailsPage() {
     const [item,] = useState({ ...state.selectedItem }, {});
     let [quantity, setQuantity] = useState(state.tray[item.id] ? state.tray[item.id].quantity : 0);
     const [specialInstruction, setSpecialInstruction] = useState(state.tray[item.id] ? state.tray[item.id].instruction : "");
+    const [total, setTotal] = useState(state.total);
 
     const increaseQuantity = () => {
         quantity++;
+        setTotal(total + parseFloat(item.price));
         setQuantity(quantity);
     }
 
     const decreaseQuantity = () => {
         quantity--;
+        setTotal(total - parseFloat(item.price));
         setQuantity(quantity);
     }
 
@@ -37,7 +40,8 @@ function DetailsPage() {
         await dispatch({
             type: 'update_tray',
             payload: {
-                tray: { ...newTray }
+                tray: { ...newTray },
+                total: total
             }
         });
         await navigate(-1);

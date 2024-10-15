@@ -26,6 +26,7 @@ function MenuPage() {
 
     const [restaurant,] = useState("Naan N Curry");
     const [description,] = useState("Indian Cuisine");
+    const [total, setTotal] = useState(state.total);
     const [selectedCategory, setSelectedCategory] = useState(state.selectedCategory, 'Best Sellers');
     const [categories,] = useState(['Best Sellers', 'Appetizers', 'Curry', 'Naans', 'Beverages']);
     const [items, setItems] = useState([
@@ -144,8 +145,6 @@ function MenuPage() {
     ]);
     const [tray, setTray] = useState({ ...state.tray }, {});
 
-    let total = 0.00;
-
     const renderCategories = () => {
         return categories.map((category, index) => {
             return (
@@ -176,6 +175,7 @@ function MenuPage() {
                 } else {
                     newTray[itemId] = { ...item, quantity: 1 };
                 }
+                setTotal(total + parseFloat(item.price));
                 setTray(newTray);
             }
         })
@@ -195,6 +195,7 @@ function MenuPage() {
                 if (newTray[itemId].quantity === 0) {
                     delete newTray[itemId];
                 }
+                setTotal(total - parseFloat(item.price));
                 setTray(newTray);
             }
         })
@@ -204,7 +205,6 @@ function MenuPage() {
     const renderItems = () => {
         const filteredItems = items.filter(item => item.categories.includes(selectedCategory));
         return filteredItems.map(item => {
-            total += tray[item.id] !== undefined ? tray[item.id].quantity * parseFloat(item.price) : 0.00;
             return (
                 <div className='menu-item-div' key={item.id}>
                     <div className='menu-item-img-div'>
@@ -229,7 +229,8 @@ function MenuPage() {
             type: 'select_item',
             payload: {
                 tray: { ...tray },
-                selectedItem: { ...item }
+                selectedItem: { ...item },
+                total: total
             }
         });
         await navigate("details");
@@ -239,7 +240,8 @@ function MenuPage() {
         await dispatch({
             type: 'update_tray',
             payload: {
-                tray: { ...tray }
+                tray: { ...tray },
+                total: total
             }
         });
         await navigate(navigateTo);

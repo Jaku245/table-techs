@@ -8,20 +8,33 @@ const Reducer = (state, action) => {
         case 'update_tray':
             return {
                 ...state,
-                tray: { ...action.payload.tray }
+                tray: { ...action.payload.tray },
+                total: action.payload.total
             };
         case 'select_item':
             return {
                 ...state,
                 tray: { ...action.payload.tray },
-                selectedItem: { ...action.payload.selectedItem }
+                selectedItem: { ...action.payload.selectedItem },
+                total: action.payload.total
             };
         case 'update_table':
             return {
                 ...state,
                 table: { ...action.payload.table },
                 allTrays: [...action.payload.allTrays],
-                tray: {}
+                tray: {},
+                total: 0.00
+            };
+        case 'payment_done':
+            return {
+                ...state,
+                table: {},
+                allTrays: [],
+                tray: {},
+                total: 0.00,
+                selectedItem: {},
+                selectedCategory: 'Best Sellers'
             };
         default:
             return {

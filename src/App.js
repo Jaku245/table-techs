@@ -10,6 +10,7 @@ import TrayPage from './TableOrdering/Pages/Tray/Tray';
 import TablePage from './TableOrdering/Pages/Table/Table';
 import ScrollToTop from './TableTechs/Components/ScrollToTop/ScrollToTop';
 import CheckoutPage from './TableOrdering/Pages/Checkout/Checkout';
+import ThanksPage from './TableOrdering/Pages/Thanks/Thanks';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='tray' element={<TrayPage />} />
           <Route path='table' element={<TablePage />} />
           <Route path='checkout' element={<CheckoutPage />} />
+          <Route path='thanks' element={<ThanksPage />} />
           <Route path='' element={<MenuPage />} />
           <Route path='*' element={<Navigate to="/order" />} />
         </Route>
