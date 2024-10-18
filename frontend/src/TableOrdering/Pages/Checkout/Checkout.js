@@ -49,20 +49,16 @@ function CheckoutPage() {
         setTipSelected(tipFilter);
     }
 
-    const clearAppData = () => {
-        dispatch({
-            type: 'payment_done'
+    const onPayment = async () => {
+        const total = parseFloat((postTax + (tip || parseFloat("0.00"))).toFixed(2));
+        // clearAppData();
+        await dispatch({
+            type: 'start_card_payment',
+            payload: {
+                tableTotal: total
+            }
         });
-    }
-
-    const onApplePay = () => {
-        clearAppData();
-        navigate("/order/thanks");
-    }
-
-    const onCardPay = async () => {
-        clearAppData();
-        navigate("/order/thanks");
+        await navigate("/order/payment");
     }
 
     return (
@@ -102,19 +98,21 @@ function CheckoutPage() {
                     <p>Tip</p>
                     <p>{isNaN(parseFloat(tip)) ? "$0.00" : "$" + parseFloat(tip).toFixed(2)}</p>
                 </div>
+                <div className="checkout-hr-line" />
+                <div className="checkout-sub-total poppins-semibold">
+                    <p>Total</p>
+                    <p>{" $" + (postTax + (tip || parseFloat("0.00"))).toFixed(2) + "  "}</p>
+                </div>
             </div>
             <div className='checkout-bottom-container'>
-                <p className="checkout-total-div">
+                {/* <p className="checkout-total-div">
                     <span>pay</span><span className='checkout-total-content poppins-semibold'>{" $" + (postTax + (tip || parseFloat("0.00"))).toFixed(2) + "  "}</span><span>with</span>
-                </p>
-                <div className='checkout-total-container'>
-                    <div className='checkout-apple-pay-btn' onClick={() => onApplePay()}>
-                        <span>Apple Pay</span>
+                </p> */}
+                {/* <div className='checkout-total-container'> */}
+                    <div className='checkout-debit-btn' onClick={onPayment}>
+                        <span>Proceed to Payment</span>
                     </div>
-                    <div className='checkout-debit-btn' onClick={() => onCardPay()}>
-                        <span>Debit / Credit</span>
-                    </div>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )

@@ -105,11 +105,11 @@
 
 .checkout-bottom-container {
     position: fixed;
-    bottom: 0;
+    bottom: 25px;
+    left: 25px;
+    right: 25px;
     background-color: var(--light-bg);
-    padding-block: 10px;
-    width: 100%;
-    border-top: 1px solid var(--primary-accent);
+    /* border-top: 1px solid var(--primary-accent); */
 }
 
 .checkout-total-container {
@@ -131,9 +131,8 @@
 
 .checkout-debit-btn {
     flex: 1;
-    margin-left: 10px;
     color: var(--light-bg);
-    padding: 10px 20px;
+    padding-block: 10px;
     background-color: var(--primary-accent);
     text-align: center;
     border-radius: 5px;

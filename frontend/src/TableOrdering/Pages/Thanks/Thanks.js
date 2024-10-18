@@ -1,12 +1,15 @@
-import './Thanks.css';
-import thanksImg from '../../../Assets/Thank-you.jpg';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight, faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 
+import './Thanks.css';
+import thanksImg from '../../../Assets/Thank-you.jpg';
+import { context } from '../../../Store';
+
 function ThanksPage() {
 
+    const [,dispatch] = useContext(context);
     const [stars, setStars] = useState([false, false, false, false, false]);
     const [email, setEmail] = useState("");
 
@@ -29,6 +32,12 @@ function ThanksPage() {
     const sendInvoice = () => {
         console.log("Invoice sent");
     }
+
+    useEffect(() => {
+        dispatch({
+            type: 'payment_done'
+        });
+    })
 
     return (
         <div className='thanks-bg'>
