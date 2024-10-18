@@ -26,6 +26,11 @@ const Reducer = (state, action) => {
                 tray: {},
                 total: 0.00
             };
+        case 'start_card_payment':
+            return {
+                ...state,
+                tableTotal: action.payload.tableTotal
+            }
         case 'payment_done':
             return {
                 ...state,

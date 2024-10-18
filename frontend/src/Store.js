@@ -7,6 +7,7 @@ const initialState = {
     table: {},
     user: {},
     total: 0.00,
+    tableTotal: 0.00,
     selectedItem: {},
     selectedCategory: 'Best Sellers'
 };

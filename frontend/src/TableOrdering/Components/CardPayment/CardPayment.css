@@ -1,0 +1,12 @@
+.payment-div {
+    padding-inline: 20px;
+}
+
+.payment-total {
+    text-align: center;
+    font-size: 24px;
+}
+
+form>* {
+    margin: 10px 0;
+}
